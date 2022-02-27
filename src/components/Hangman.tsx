@@ -21,6 +21,7 @@ const Hangman = () => {
     const images = [mistake0, mistake1, mistake2, mistake3, mistake4, mistake5, mistake6, mistake7,
     mistake8, mistake9]
     const theme = localStorage.getItem("theme")
+    let vh = window.innerHeight * 0.01
     let wordList: any = []
     let message!: string
     let result!: boolean
@@ -33,19 +34,17 @@ const Hangman = () => {
     const [disabled, setDisabled] = useState(false)
     const [darkMode, setDarkMode] = useState(theme === 'dark' ? true : false)
     const [help, setHelp] = useState(false)
-    const canvasRef: any = useRef()
-    const canvas = canvasRef.current;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    window.addEventListener('resize', () => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    })
     if(darkMode === true) {
         document.getElementById("hangman")?.classList.add("dark")
         localStorage.setItem("theme", "dark")
     } else {
         document.getElementById("hangman")?.classList.remove("dark")
         localStorage.setItem("theme", "light")
-    }
-    if(canvas) {
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.height, canvas.width)
-        
     }
     
     const wordOfTheDay = () => {
@@ -162,6 +161,7 @@ const Hangman = () => {
         }
         wordOfTheDay()
         } else {
+          setWord(answer)
           setAnswer(answer)
         }
     }, [])

@@ -12,7 +12,7 @@ interface Props {
 const Keyboard = (Props: Props) => {
     const keys = 'qwertyuiopasdfghjklzxcvbnm'
 
-
+   
     return (
         <div className="keyboard">
           {keys.split("").map((letter) => {
