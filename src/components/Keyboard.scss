@@ -1,0 +1,28 @@
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @media(min-width: 1000px) {
+        width: 50%;
+    }
+}
+
+.key {
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    justify-content: center;
+    text-transform: uppercase;
+    align-items: center;
+    margin: 5px;
+    background-color: #fdfdfd;
+    border: 2px solid black;
+    font-size: xx-large;
+    box-shadow: 0px 2px 3px 0px gray;
+}
+
+.key:disabled {
+    background-color: gray;
+    box-shadow: none;
+}
