@@ -15,6 +15,11 @@ import mistake8 from '../images/mistake8.png'
 import mistake9 from '../images/mistake9.png'
 
 
+interface Hang {
+    current: HTMLDivElement | null
+}
+
+
 const Hangman = () => {
     const maxTries = 9
     const time = 84600
@@ -34,16 +39,17 @@ const Hangman = () => {
     const [disabled, setDisabled] = useState(false)
     const [darkMode, setDarkMode] = useState(theme === 'dark' ? true : false)
     const [help, setHelp] = useState(false)
+    const hangerman: Hang = useRef(null)
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     window.addEventListener('resize', () => {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     })
     if(darkMode === true) {
-        document.getElementById("hangman")?.classList.add("dark")
+        hangerman.current?.classList.add('dark')
         localStorage.setItem("theme", "dark")
     } else {
-        document.getElementById("hangman")?.classList.remove("dark")
+        hangerman.current?.classList.remove('dark')
         localStorage.setItem("theme", "light")
     }
     
@@ -172,7 +178,7 @@ const Hangman = () => {
     gameResult()
 
     return (
-        <div className="container" id="hangman">
+        <div className="container" ref={hangerman}>
             <header className="header">
                 <div className="header-item">
                     <label className="switch">
